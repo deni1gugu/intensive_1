@@ -1,12 +1,6 @@
-from bs4 import BeautifulSoup
-import requests
-url = "https://www.cian.ru"
+import cianparser
 
-response = requests.get(url)
+moscow_parser = cianparser.CianParser(location="Химки")
+data = moscow_parser.get_flats(deal_type="sale", rooms=2, with_saving_csv=True, additional_settings={"start_page":1, "end_page":20}, with_extra_data = True)
 
-soup = BeautifulSoup(response.text, "lxml") 
-
-data = soup.find("div", class_="_33974c2b58--info--dNDv8")
-
-
-name = data.find("span", class_="_33974c2b58--color_black_100--Ephi7 _33974c2b58--lineHeight_7u--jtkAy _33974c2b58--fontWeight_bold--BbhnX _33974c2b58--fontSize_22px--sFuaL _33974c2b58--display_block--KYb25 _33974c2b58--text--e4SBY")
+print(data[0])
